@@ -1,0 +1,62 @@
+/* ============================================================
+   JARVIS LAYOUT WRAPPER
+   ============================================================ */
+
+.monolab-layout {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: transparent;
+    /* Video wallpaper sits behind — must be transparent */
+    /* HUD viewport border effect */
+    position: relative;
+}
+
+/* Subtle HUD glow outline around the entire viewport edges */
+.monolab-layout::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    /* Top and bottom viewport glow bars */
+    box-shadow:
+        inset 0 2px 0 rgba(0, 212, 255, 0.1),
+        inset 0 -2px 0 rgba(0, 212, 255, 0.06);
+}
+
+.monolab-layout-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+    min-width: 0;
+}
+
+.monolab-layout-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1.75rem 2rem;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+/* Subtle inner glow at the top of the content area */
+.monolab-layout-content::before {
+    content: '';
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    display: block;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(0, 212, 255, 0.12) 30%,
+            rgba(0, 212, 255, 0.12) 70%,
+            transparent);
+    pointer-events: none;
+}

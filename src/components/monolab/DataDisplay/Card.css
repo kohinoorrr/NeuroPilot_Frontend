@@ -1,0 +1,134 @@
+/* ============================================================
+   MONOLAB CARD — LIQUID GLASS + TONY STARK EDITION
+   ============================================================ */
+
+.monolab-card {
+    /* Liquid glass foundation */
+    background: linear-gradient(135deg,
+            rgba(6, 17, 31, 0.7) 0%,
+            rgba(0, 212, 255, 0.03) 100%);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+
+    /* Iridescent border */
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-primary);
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+
+    /* Subtle bottom glow reflection */
+    box-shadow: var(--glass-shadow);
+}
+
+/* Top shine strip (liquid glass effect) */
+.monolab-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(0, 212, 255, 0.4) 30%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(0, 212, 255, 0.4) 70%,
+            transparent 100%);
+    pointer-events: none;
+}
+
+/* Animated neon border draw on hover */
+.monolab-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.35), rgba(0, 153, 204, 0)) border-box;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.monolab-card:hover::after {
+    opacity: 1;
+}
+
+/* ---- Variants ---- */
+.monolab-card-default {
+    box-shadow: var(--shadow-sm);
+}
+
+.monolab-card-elevated {
+    background: linear-gradient(135deg,
+            rgba(10, 26, 46, 0.75) 0%,
+            rgba(0, 212, 255, 0.04) 100%);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 212, 255, 0.18);
+}
+
+.monolab-card-neon {
+    border-color: rgba(0, 212, 255, 0.35);
+    box-shadow:
+        inset 0 0 30px rgba(0, 212, 255, 0.06),
+        0 0 20px rgba(0, 212, 255, 0.15),
+        var(--shadow-md);
+}
+
+/* ---- Padding ---- */
+.monolab-card-p-none {
+    padding: 0;
+}
+
+.monolab-card-p-sm {
+    padding: var(--spacing-3);
+}
+
+.monolab-card-p-md {
+    padding: var(--spacing-6);
+}
+
+.monolab-card-p-lg {
+    padding: var(--spacing-8);
+}
+
+/* ---- Clickable / Interactive ---- */
+.monolab-card-clickable {
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+.monolab-card-clickable:hover {
+    transform: translateY(-8px) scale(1.015);
+    border-color: rgba(0, 212, 255, 0.45);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(0, 212, 255, 0.2),
+        inset 0 0 20px rgba(0, 212, 255, 0.05);
+}
+
+.monolab-card-neon.monolab-card-clickable:hover {
+    box-shadow:
+        0 20px 60px rgba(0, 212, 255, 0.25),
+        0 0 40px rgba(0, 212, 255, 0.2),
+        inset 0 0 30px rgba(0, 212, 255, 0.08);
+}
+
+/* ---- 3D Tilt (applied via JS) ---- */
+.monolab-card-tilt {
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}

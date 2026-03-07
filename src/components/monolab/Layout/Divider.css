@@ -1,0 +1,26 @@
+.monolab-divider {
+    background-color: var(--glass-border);
+    flex-shrink: 0;
+}
+
+.monolab-divider-horizontal {
+    height: 1px;
+    width: 100%;
+    margin: var(--spacing-4) 0;
+}
+
+.monolab-divider-vertical {
+    width: 1px;
+    height: 100%;
+    margin: 0 var(--spacing-4);
+}
+
+.monolab-divider-neon {
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    box-shadow: 0 0 8px var(--color-primary);
+    opacity: 0.5;
+}
+
+.monolab-divider-vertical.monolab-divider-neon {
+    background: linear-gradient(180deg, transparent, var(--color-primary), transparent);
+}

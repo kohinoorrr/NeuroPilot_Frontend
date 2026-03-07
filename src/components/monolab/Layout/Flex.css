@@ -1,0 +1,72 @@
+.monolab-flex {
+    display: flex;
+}
+
+/* Direction */
+.monolab-flex-dir-row {
+    flex-direction: row;
+}
+
+.monolab-flex-dir-column {
+    flex-direction: column;
+}
+
+/* Alignment */
+.monolab-flex-align-start {
+    align-items: flex-start;
+}
+
+.monolab-flex-align-center {
+    align-items: center;
+}
+
+.monolab-flex-align-end {
+    align-items: flex-end;
+}
+
+.monolab-flex-align-stretch {
+    align-items: stretch;
+}
+
+/* Justification */
+.monolab-flex-justify-start {
+    justify-content: flex-start;
+}
+
+.monolab-flex-justify-center {
+    justify-content: center;
+}
+
+.monolab-flex-justify-end {
+    justify-content: flex-end;
+}
+
+.monolab-flex-justify-between {
+    justify-content: space-between;
+}
+
+.monolab-flex-justify-around {
+    justify-content: space-around;
+}
+
+/* Wrap */
+.monolab-flex-wrap {
+    flex-wrap: wrap;
+}
+
+/* Gaps */
+.monolab-flex-gap-none {
+    gap: 0;
+}
+
+.monolab-flex-gap-sm {
+    gap: var(--spacing-2);
+}
+
+.monolab-flex-gap-md {
+    gap: var(--spacing-4);
+}
+
+.monolab-flex-gap-lg {
+    gap: var(--spacing-6);
+}

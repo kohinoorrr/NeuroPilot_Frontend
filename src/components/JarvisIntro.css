@@ -1,0 +1,435 @@
+/* ====================================
+   JARVIS BOOT INTRO SCREEN
+   ==================================== */
+
+.jarvis-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #020510;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Animated scanline that sweeps top to bottom */
+.jarvis-intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 212, 255, 0.015) 2px,
+            rgba(0, 212, 255, 0.015) 4px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Horizontal scan sweep */
+.jarvis-intro::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #00d4ff, #0099ff, transparent);
+    box-shadow: 0 0 20px #00d4ff, 0 0 60px rgba(0, 212, 255, 0.5);
+    animation: intro-scan 2.5s ease-in-out 0.5s forwards;
+    top: -3px;
+    z-index: 2;
+}
+
+@keyframes intro-scan {
+    0% {
+        top: -3px;
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* HUD Corner decorations */
+.jarvis-corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    z-index: 3;
+    opacity: 0;
+    animation: corner-appear 0.6s ease forwards;
+}
+
+.jarvis-corner svg {
+    color: #00d4ff;
+}
+
+.jarvis-corner.top-left {
+    top: 30px;
+    left: 30px;
+    animation-delay: 0.2s;
+}
+
+.jarvis-corner.top-right {
+    top: 30px;
+    right: 30px;
+    transform: scaleX(-1);
+    animation-delay: 0.3s;
+}
+
+.jarvis-corner.bottom-left {
+    bottom: 30px;
+    left: 30px;
+    transform: scaleY(-1);
+    animation-delay: 0.4s;
+}
+
+.jarvis-corner.bottom-right {
+    bottom: 30px;
+    right: 30px;
+    transform: scale(-1);
+    animation-delay: 0.5s;
+}
+
+@keyframes corner-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.jarvis-corner.top-right {
+    animation: corner-appear-flip-x 0.6s ease 0.3s forwards;
+}
+
+.jarvis-corner.bottom-left {
+    animation: corner-appear-flip-y 0.6s ease 0.4s forwards;
+}
+
+.jarvis-corner.bottom-right {
+    animation: corner-appear-flip-xy 0.6s ease 0.5s forwards;
+}
+
+@keyframes corner-appear-flip-x {
+    from {
+        opacity: 0;
+        transform: scaleX(-1) scale(0.5)
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleX(-1)
+    }
+}
+
+@keyframes corner-appear-flip-y {
+    from {
+        opacity: 0;
+        transform: scaleY(-1) scale(0.5)
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleY(-1)
+    }
+}
+
+@keyframes corner-appear-flip-xy {
+    from {
+        opacity: 0;
+        transform: scale(-1, -.5)
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(-1)
+    }
+}
+
+/* Center ARC REACTOR logo */
+.jarvis-reactor {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.jarvis-arc {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jarvis-arc-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    animation: ring-spin 3s linear infinite;
+}
+
+.jarvis-arc-ring:nth-child(1) {
+    width: 140px;
+    height: 140px;
+    border-top-color: #00d4ff;
+    border-right-color: rgba(0, 212, 255, 0.3);
+    animation-duration: 2s;
+}
+
+.jarvis-arc-ring:nth-child(2) {
+    width: 110px;
+    height: 110px;
+    border-top-color: #0066ff;
+    border-left-color: rgba(0, 102, 255, 0.4);
+    animation-duration: 3s;
+    animation-direction: reverse;
+}
+
+.jarvis-arc-ring:nth-child(3) {
+    width: 82px;
+    height: 82px;
+    border-top-color: #00f0ff;
+    border-bottom-color: rgba(0, 240, 255, 0.2);
+    animation-duration: 1.5s;
+}
+
+@keyframes ring-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.jarvis-arc-core {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #00d4ff 0%, #0055cc 50%, #001433 100%);
+    box-shadow:
+        0 0 20px #00d4ff,
+        0 0 60px rgba(0, 212, 255, 0.6),
+        0 0 120px rgba(0, 100, 255, 0.3),
+        inset 0 0 20px rgba(0, 200, 255, 0.5);
+    animation: core-pulse 1.5s ease-in-out infinite;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Voice wave bars inside the orb */
+.jarvis-wave-bars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 28px;
+}
+
+.jarvis-wave-bar {
+    width: 3px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 2px;
+    animation: jarvis-wave 0.6s ease-in-out infinite alternate;
+    min-height: 4px;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.jarvis-wave-bar:nth-child(odd) {
+    animation-duration: 0.5s;
+}
+
+.jarvis-wave-bar:nth-child(even) {
+    animation-duration: 0.8s;
+}
+
+@keyframes jarvis-wave {
+    from {
+        height: 4px;
+        opacity: 0.4;
+    }
+
+    to {
+        height: 22px;
+        opacity: 1;
+    }
+}
+
+@keyframes core-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px #00d4ff, 0 0 60px rgba(0, 212, 255, 0.6), 0 0 120px rgba(0, 100, 255, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 40px #00d4ff, 0 0 100px rgba(0, 212, 255, 0.9), 0 0 180px rgba(0, 100, 255, 0.5);
+    }
+}
+
+/* Title + typewriter text */
+.jarvis-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    color: #00d4ff;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 60px rgba(0, 212, 255, 0.3);
+    opacity: 0;
+    animation: title-appear 0.8s ease 1s forwards;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+@keyframes title-appear {
+    from {
+        opacity: 0;
+        letter-spacing: 1em;
+    }
+
+    to {
+        opacity: 1;
+        letter-spacing: 0.4em;
+    }
+}
+
+.jarvis-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: rgba(0, 212, 255, 0.5);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fade-up 0.6s ease 1.5s forwards;
+}
+
+.jarvis-status-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: rgba(0, 212, 255, 0.6);
+    text-align: center;
+    opacity: 0;
+    animation: fade-up 0.6s ease 2s forwards;
+    min-height: 80px;
+}
+
+.jarvis-status-line {
+    opacity: 0;
+    animation: line-appear 0.3s ease forwards;
+}
+
+.jarvis-status-line:nth-child(1) {
+    animation-delay: 2.0s;
+}
+
+.jarvis-status-line:nth-child(2) {
+    animation-delay: 2.3s;
+}
+
+.jarvis-status-line:nth-child(3) {
+    animation-delay: 2.6s;
+}
+
+.jarvis-status-line:nth-child(4) {
+    animation-delay: 2.9s;
+}
+
+@keyframes line-appear {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.jarvis-progress-bar-outer {
+    width: 320px;
+    height: 3px;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fade-up 0.4s ease 2.1s forwards;
+}
+
+.jarvis-progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, #0066ff, #00d4ff, #00f0ff);
+    box-shadow: 0 0 10px #00d4ff;
+    animation: progress-fill 1.6s ease 2.2s forwards;
+    width: 0%;
+}
+
+@keyframes progress-fill {
+    0% {
+        width: 0%;
+    }
+
+    30% {
+        width: 40%;
+    }
+
+    60% {
+        width: 75%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+/* Outro - full intro slides up */
+.jarvis-intro.exiting {
+    animation: intro-exit 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes intro-exit {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+/* Helpers */
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

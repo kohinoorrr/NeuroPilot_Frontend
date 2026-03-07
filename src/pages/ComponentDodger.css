@@ -1,0 +1,170 @@
+/* ============================================================
+   COMPONENT DODGER — Spaceship game stylesheet
+   ============================================================ */
+
+.cdg-game-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: #000008;
+    overflow: hidden;
+}
+
+.cdg-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+/* ── Start / Game Over screen ──────────────────────── */
+.cdg-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0, 10, 30, 0.98) 0%, #000008 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cdg-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.cdg-orb {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid var(--tc, #00d4ff);
+    box-shadow: 0 0 30px var(--tc, #00d4ff), inset 0 0 20px color-mix(in srgb, var(--ts) 20%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    animation: orb-pulse 2s ease-in-out infinite;
+}
+
+@keyframes orb-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px var(--tc), inset 0 0 20px transparent;
+    }
+
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 55px var(--tc), inset 0 0 30px var(--ts)44;
+    }
+}
+
+.cdg-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 30px currentColor;
+    margin: 0;
+}
+
+.cdg-sub {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary, #6a8aaa);
+    line-height: 1.6;
+    max-width: 380px;
+}
+
+.cdg-controls-info {
+    display: flex;
+    gap: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--color-text-muted, #4a6080);
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+}
+
+.cdg-score-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    color: var(--color-text-secondary, #6a8aaa);
+}
+
+.cdg-score-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+}
+
+.cdg-hi {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--color-text-muted, #4a6080);
+    letter-spacing: 0.1em;
+}
+
+.cdg-start-btn {
+    margin-top: 0.5rem;
+    padding: 0.75rem 2.5rem;
+    background: transparent;
+    border: 2px solid var(--tc, #00d4ff);
+    border-radius: 100px;
+    color: var(--tc, #00d4ff);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    cursor: none;
+    text-transform: uppercase;
+    box-shadow: 0 0 20px color-mix(in srgb, var(--tc) 40%, transparent);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.cdg-start-btn:hover {
+    background: color-mix(in srgb, var(--tc) 15%, transparent);
+    box-shadow: 0 0 40px color-mix(in srgb, var(--tc) 60%, transparent);
+    transform: scale(1.05);
+}
+
+/* Game over screen final score */
+.cdg-final-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.cdg-big-score {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--color-primary, #00d4ff);
+    text-shadow: 0 0 30px var(--color-primary, #00d4ff);
+}
+
+.cdg-new-hi {
+    font-size: 0.85rem;
+    color: #ffaa00;
+    animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}

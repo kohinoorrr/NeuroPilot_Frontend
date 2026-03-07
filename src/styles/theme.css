@@ -1,0 +1,426 @@
+/* ============================================================
+   NEUROPILOT — TONY STARK / JARVIS THEME
+   Arc Reactor Blue Edition
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    /* === JARVIS COLOR PALETTE ===
+       Tony Stark Arc Reactor Blue + Deep Space Navy */
+    --color-bg-base: #020914;
+    --color-bg-surface: #06111f;
+    --color-bg-surface-elevated: #0a1a2e;
+
+    /* Primary: Arc Reactor Cyan-Blue */
+    --color-primary: #00d4ff;
+    /* Bright arc reactor cyan */
+    --color-primary-dark: #0099cc;
+    --color-primary-glow: rgba(0, 212, 255, 0.35);
+
+    /* Secondary: Tony Stark Gold / Warm Amber */
+    --color-secondary: #c0a040;
+    /* Iron Man suit gold */
+    --color-secondary-glow: rgba(192, 160, 64, 0.25);
+
+    /* Accent: Electric Blue */
+    --color-accent: #4488ff;
+
+    /* Status */
+    --color-success: #00e676;
+    --color-warning: #ffa726;
+    --color-danger: #ff3060;
+    --color-info: #40c4ff;
+
+    /* Text */
+    --color-text-primary: #e8f4ff;
+    --color-text-secondary: #6a8aaa;
+    --color-text-muted: #3a5a7a;
+
+    /* === LIQUID GLASS ===
+       Multi-layer blur with iridescent borders */
+    --glass-bg: rgba(6, 17, 31, 0.55);
+    --glass-bg-2: rgba(0, 212, 255, 0.04);
+    --glass-border: rgba(0, 212, 255, 0.18);
+    --glass-border-hover: rgba(0, 212, 255, 0.5);
+    --glass-blur: blur(20px) saturate(160%);
+    --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(0, 212, 255, 0.1);
+
+    /* === NEON GLOWS === */
+    --glow-primary: 0 0 8px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.25);
+    --glow-secondary: 0 0 8px rgba(192, 160, 64, 0.6), 0 0 30px rgba(192, 160, 64, 0.2);
+    --glow-success: 0 0 8px rgba(0, 230, 118, 0.6);
+    --glow-danger: 0 0 8px rgba(255, 48, 96, 0.6);
+    --shadow-neon-primary: 0 0 12px rgba(0, 212, 255, 0.7);
+    --shadow-neon-secondary: 0 0 12px rgba(192, 160, 64, 0.6);
+
+    /* === ELEVATION === */
+    --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 6px 28px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 16px 60px rgba(0, 0, 0, 0.9);
+
+    /* === TYPOGRAPHY === */
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+    /* === SPACING === */
+    --spacing-1: 0.25rem;
+    --spacing-2: 0.5rem;
+    --spacing-3: 0.75rem;
+    --spacing-4: 1rem;
+    --spacing-6: 1.5rem;
+    --spacing-8: 2rem;
+
+    /* === BORDER RADIUS === */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+
+    /* === TRANSITIONS === */
+    --transition-fast: 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    /* Video wallpaper sits at z-index:-2; body MUST NOT have an opaque background */
+    background: transparent;
+
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR — STARK HUD STYLE
+   ============================================================ */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 212, 255, 0.03);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 212, 255, 0.3);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 212, 255, 0.7);
+    box-shadow: var(--glow-primary);
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+html {
+    cursor: none;
+}
+
+.cursor-main {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 100000;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    transition: width 0.15s, height 0.15s, background 0.15s, border-color 0.15s;
+    box-shadow: var(--glow-primary);
+    mix-blend-mode: normal;
+}
+
+.cursor-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 100001;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    box-shadow: var(--glow-primary);
+    transition: width 0.1s, height 0.1s;
+}
+
+body:has(button:hover) .cursor-main,
+body:has(a:hover) .cursor-main {
+    width: 34px;
+    height: 34px;
+    border-color: var(--color-primary);
+    background: rgba(0, 212, 255, 0.1);
+}
+
+/* ============================================================
+   PAGE TRANSITIONS
+   ============================================================ */
+.page-enter {
+    animation: page-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.page-exit {
+    animation: page-slide-out 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes page-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(40px) scale(0.98);
+        filter: blur(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes page-slide-out {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        filter: blur(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-40px) scale(0.98);
+        filter: blur(4px);
+    }
+}
+
+/* ============================================================
+   GLOBAL ANIMATIONS
+   ============================================================ */
+
+/* Fade in upward (existing usage) */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Breathing pulse (for icons, dots) */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse 2.5s ease-in-out infinite;
+}
+
+/* Neon glow flicker */
+@keyframes glow-flicker {
+
+    0%,
+    100% {
+        box-shadow: var(--glow-primary);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.9), 0 0 60px rgba(0, 212, 255, 0.35);
+    }
+}
+
+/* Number count-up (used by StatPanel) */
+@keyframes count-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Shimmer sweep for buttons */
+@keyframes btn-shimmer {
+    from {
+        background-position: 200% center;
+    }
+
+    to {
+        background-position: -200% center;
+    }
+}
+
+/* Arc border draw-in on hover */
+@keyframes border-draw {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* Ripple effect */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Scanning line */
+@keyframes scan-line {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(400%);
+    }
+}
+
+/* HUD status dot blink */
+@keyframes status-blink {
+
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 6px var(--color-success), 0 0 20px rgba(0, 230, 118, 0.4);
+    }
+
+    50% {
+        opacity: 0.4;
+        box-shadow: none;
+    }
+}
+
+/* Horizontal HUD sweep */
+@keyframes hud-sweep {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Stagger reveal for list items */
+@keyframes stagger-in {
+    from {
+        opacity: 0;
+        transform: translateX(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Floating hover bob */
+@keyframes float-bob {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+}
+
+.neon-text-primary {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.7);
+}
+
+.neon-text-secondary {
+    color: var(--color-secondary);
+    text-shadow: 0 0 10px rgba(192, 160, 64, 0.7);
+}
+
+.hud-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    padding: 2px 8px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 2px;
+    background: rgba(0, 212, 255, 0.05);
+}
