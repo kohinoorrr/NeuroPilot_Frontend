@@ -20,6 +20,8 @@ export default function ThemeWallpaper() {
 
     // Reload video when theme changes
     useEffect(() => {
+        if (themeKey !== 'nebula') return;
+        
         const v = videoRef.current;
         if (!v) return;
         const src = `/wallpapers/${themeKey}.mp4`;
@@ -29,6 +31,10 @@ export default function ThemeWallpaper() {
         v.load();
         v.play().catch(() => { }); // suppress autoplay policy errors
     }, [themeKey]);
+
+    if (themeKey !== 'nebula') {
+        return null;
+    }
 
     const cfg = CONFIG[themeKey] || CONFIG.jarvis;
     const opacity = lightMode ? cfg.light : cfg.dark;
